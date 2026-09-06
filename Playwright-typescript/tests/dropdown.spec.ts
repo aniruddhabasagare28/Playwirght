@@ -18,7 +18,7 @@ test('dropdown', async({page})=>{
    await expect(dropdown).toHaveValue('Adobe InDesign');
 })
 
-test.only('non searchable', async({page})=>{
+test('non searchable', async({page})=>{
     await page.goto('https://demo.automationtesting.in/Register.html')
     await page.locator('span[role="combobox"]').click();
     await page.locator('ul#select2-country-results>li', {hasText: 'India'}).click();

@@ -1,6 +1,18 @@
 import { defineConfig, devices } from '@playwright/test';
 
 /**
+ * Device presets (devices['Desktop Chrome'] etc.) each carry their own fixed
+ * `viewport` and `deviceScaleFactor`. Both must be stripped for a project to
+ * actually launch maximized (`viewport: null` + `--start-maximized`) -
+ * Playwright rejects `deviceScaleFactor` outright when viewport is null, and
+ * a leftover `viewport` would silently override the top-level `use.viewport`.
+ */
+function maximized<T extends { viewport?: unknown; deviceScaleFactor?: unknown }>(device: T) {
+  const { viewport, deviceScaleFactor, ...rest } = device;
+  return { ...rest, viewport: null };
+}
+
+/**
  * Read environment variables from file.
  * https://github.com/motdotla/dotenv
  */
@@ -32,23 +44,27 @@ export default defineConfig({
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'retain-on-failure',
     headless: false,
+    viewport:null,
+    launchOptions:{
+      args:['--start-maximized']
+    }
   },
 
   /* Configure projects for major browsers */
   projects: [
     {
       name: 'chromium',
-      use: { ...devices['Desktop Chrome'] },
+      use: maximized(devices['Desktop Chrome']),
     },
 
     {
       name: 'firefox',
-      use: { ...devices['Desktop Firefox'] },
+      use: maximized(devices['Desktop Firefox']),
     },
 
     {
       name: 'webkit',
-      use: { ...devices['Desktop Safari'] },
+      use: maximized(devices['Desktop Safari']),
     },
 
     /* Test against mobile viewports. */
