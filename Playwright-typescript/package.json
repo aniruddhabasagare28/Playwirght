@@ -4,7 +4,13 @@
   "main": "index.js",
   "scripts": {
     "build": "tsc --noEmit",
-    "test": "playwright test"
+    "clean.reports":"rimraf allure-results allure-report && mkdirp allure-results allure-report",
+    "generate.report":"npx allure generate ./allure-results --clean --single-file",
+    "open.report":"npx allure open ./allure-report",
+    "execute.test":"npx playwright test --project=chromium",
+    "pretest":"npm run clean.reports",
+    "posttest":"npm run generate.report && npm run open.report",
+    "test":"npm run execute.test || npm run generate.report"
   },
   "keywords": [],
   "author": "",
@@ -16,5 +22,9 @@
     "@types/node": "^26.4.1",
     "luxon": "^3.7.2",
     "typescript": "^5.9.3"
+  },
+  "dependencies": {
+    "allure-commandline": "^2.43.0",
+    "allure-playwright": "^3.12.0"
   }
 }
