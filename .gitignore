@@ -1,3 +1,4 @@
 node_modules/
 .playwright-mcp/
 allure-results/
+.claude/settings.local.json
