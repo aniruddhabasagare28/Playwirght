@@ -1,0 +1,6 @@
+{
+  "name": "playwright-test-writer",
+  "description": "Explores live web apps with Playwright MCP tools, then writes/updates Playwright TypeScript spec files",
+  "version": "1.0.0",
+  "author": { "name": "Aniruddha" }
+}

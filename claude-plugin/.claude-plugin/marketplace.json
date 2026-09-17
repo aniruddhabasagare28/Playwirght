@@ -1,0 +1,11 @@
+{
+  "name": "playwright-plugins",
+  "owner": { "name": "Aniruddha" },
+  "plugins": [
+    {
+      "name": "playwright-test-writer",
+      "source": "./playwright-test-writer",
+      "description": "Playwright test automation specialist agent"
+    }
+  ]
+}
