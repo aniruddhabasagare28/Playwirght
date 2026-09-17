@@ -7,6 +7,7 @@ export class DashboardPage extends BasePage {
     readonly userDropdown: Locator;
     readonly logoutLink: Locator;
     readonly adminTab: Locator;
+    readonly dashboardHeading: Locator;
 
     constructor(page: Page) {
         super(page)
@@ -14,6 +15,7 @@ export class DashboardPage extends BasePage {
         this.userDropdown = page.locator('.oxd-userdropdown-tab');
         this.logoutLink = page.getByRole('menuitem', { name: 'Logout' });
         this.adminTab = page.getByRole('link', { name: 'Admin' });
+        this.dashboardHeading = page.getByRole('heading', { name: 'Dashboard' });
     }
 
     async clickProfileAccordion() {

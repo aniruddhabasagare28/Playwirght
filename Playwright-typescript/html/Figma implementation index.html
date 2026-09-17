@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Little Learners Academy - Where Young Minds Blossom</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;800&family=Raleway:wght@800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background: #ffffff;
+        }
+
+        /* BUG 1: Wrong gap - should be 50px but set to 30px */
+        .hero-section {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+            padding: 60px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .image-container {
+            flex: 1;
+            background: #FFBE99;
+            height: 663px;
+            position: relative;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center 50%;
+        }
+
+        /* Abstract Design Elements */
+        .abstract-dot {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            border: 3px solid #262626;
+            background: transparent;
+            position: absolute;
+        }
+
+        .abstract-line {
+            background: #262626;
+            position: absolute;
+        }
+
+        /* Corner decorations */
+        .dot-top-left { top: -7px; left: -5px; }
+        .line-top-left { top: 13px; left: 7px; width: 3px; height: 100px; }
+
+        .dot-bottom-left { bottom: -5px; left: -5px; }
+        .line-bottom-left { bottom: 7px; left: 18px; width: 100px; height: 3px; }
+
+        .dot-top-right { top: -7px; right: -5px; }
+        .line-top-right { top: 18px; right: 7px; width: 3px; height: 100px; }
+
+        .dot-bottom-right { bottom: -5px; right: -5px; }
+        .line-bottom-right { bottom: 7px; right: 18px; width: 100px; height: 3px; }
+
+        /* Abstract design overlay */
+        .abstract-overlay {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 467px;
+            height: 507px;
+            pointer-events: none;
+        }
+
+        .abstract-circles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+
+        .circle {
+            position: absolute;
+            border-radius: 50%;
+            border: 3px solid #262626;
+        }
+
+        /* BUG 2: Misaligned circles - positions are slightly off */
+        .circle-1 { width: 60px; height: 60px; top: 10%; left: 15%; background: rgba(255, 255, 255, 0.7); }
+        .circle-2 { width: 45px; height: 45px; top: 5%; left: 35%; background: rgba(255, 255, 255, 0.5); }
+        .circle-3 { width: 50px; height: 50px; top: 8%; right: 25%; background: rgba(255, 255, 255, 0.6); }
+        .circle-4 { width: 55px; height: 55px; top: 15%; right: 8%; background: rgba(255, 255, 255, 0.8); }
+        .circle-5 { width: 40px; height: 40px; left: 8%; top: 30%; background: rgba(255, 255, 255, 0.4); }
+        .circle-6 { width: 48px; height: 48px; right: 12%; top: 35%; background: rgba(255, 255, 255, 0.55); }
+        .circle-7 { width: 42px; height: 42px; left: 10%; bottom: 25%; background: rgba(255, 255, 255, 0.5); }
+        .circle-8 { width: 52px; height: 52px; right: 10%; bottom: 22%; background: rgba(255, 255, 255, 0.65); }
+        .circle-9 { width: 65px; height: 65px; left: 20%; bottom: 8%; background: rgba(255, 255, 255, 0.75); }
+        .circle-10 { width: 70px; height: 70px; bottom: 5%; left: 40%; background: rgba(255, 255, 255, 0.8); }
+        .circle-11 { width: 55px; height: 55px; bottom: 10%; right: 28%; background: rgba(255, 255, 255, 0.6); }
+
+        .content-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 50px;
+        }
+
+        .text-section {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .welcome-text {
+            font-size: 18px;
+            font-weight: 500;
+            color: #262626;
+            padding-bottom: 6px;
+            border-bottom: 2px solid #262626;
+            display: inline-block;
+            width: fit-content;
+        }
+
+        /* BUG 3: Wrong font-size - should be 40px but set to 36px */
+        .main-headline {
+            font-size: 36px;
+            font-weight: 800;
+            line-height: 1.3;
+            color: #1a1a1a;
+            font-family: 'Raleway', sans-serif;
+        }
+
+        /* BUG 4: Wrong color for highlight - should be #ff8d4d but set to #ff6b35 */
+        .highlight {
+            color: #ff6b35;
+        }
+
+        .description {
+            font-size: 16px;
+            font-weight: 500;
+            line-height: 1.5;
+            color: #333333;
+        }
+
+        /* BUG 5: Wrong background color - should be #FFEFE5 but set to #FFE5D9 */
+        .statistics-box {
+            background: #FFE5D9;
+            border: 2px solid #262626;
+            border-radius: 10px;
+            padding: 20px 40px;
+            display: flex;
+            gap: 40px;
+        }
+
+        .stat-item {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            line-height: 1.5;
+        }
+
+        .stat-number {
+            font-size: 34px;
+            font-weight: 800;
+            color: #262626;
+        }
+
+        /* BUG 6: Missing label for third stat - "Experience" missing */
+        .stat-label {
+            font-size: 16px;
+            font-weight: 500;
+            color: #262626;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .hero-section {
+                flex-direction: column;
+                padding: 40px;
+            }
+
+            .image-container {
+                width: 100%;
+                height: 500px;
+            }
+
+            .main-headline {
+                font-size: 32px;
+            }
+
+            .statistics-box {
+                flex-direction: column;
+                gap: 20px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-section {
+                padding: 20px;
+            }
+
+            .image-container {
+                height: 400px;
+            }
+
+            .main-headline {
+                font-size: 28px;
+            }
+
+            .statistics-box {
+                padding: 20px;
+            }
+
+            .abstract-overlay {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="hero-section">
+        <!-- Image Container -->
+        <div class="image-container">
+            <img src="https://www.figma.com/api/mcp/asset/85afd3c9-7a37-41db-8efb-7e301743ca40" alt="Two children sitting together smiling">
+            
+            <!-- Abstract Design Elements -->
+            <div class="abstract-dot dot-top-left"></div>
+            <div class="abstract-line line-top-left"></div>
+            
+            <div class="abstract-dot dot-bottom-left"></div>
+            <div class="abstract-line line-bottom-left"></div>
+            
+            <div class="abstract-dot dot-top-right"></div>
+            <div class="abstract-line line-top-right"></div>
+            
+            <div class="abstract-dot dot-bottom-right"></div>
+            <div class="abstract-line line-bottom-right"></div>
+
+            <!-- Abstract Circle Overlay -->
+            <div class="abstract-overlay">
+                <div class="abstract-circles">
+                    <div class="circle circle-1"></div>
+                    <div class="circle circle-2"></div>
+                    <div class="circle circle-3"></div>
+                    <div class="circle circle-4"></div>
+                    <div class="circle circle-5"></div>
+                    <div class="circle circle-6"></div>
+                    <div class="circle circle-7"></div>
+                    <div class="circle circle-8"></div>
+                    <div class="circle circle-9"></div>
+                    <div class="circle circle-10"></div>
+                    <div class="circle circle-11"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Content Container -->
+        <div class="content-container">
+            <div class="text-section">
+                <div>
+                    <div class="welcome-text">Welcome to Little Learners Academy</div>
+                </div>
+                
+                <h1 class="main-headline">
+                    Where Young Minds Blossom and <span class="highlight">Dreams Take Flight.</span>
+                </h1>
+                
+                <p class="description">
+                    Our kinder garden school provides a nurturing and stimulating environment, fostering a love for learning that lasts a lifetime. Join us as we embark on an exciting educational journey together!
+                </p>
+            </div>
+
+            <!-- Statistics Box -->
+            <div class="statistics-box">
+                <div class="stat-item">
+                    <div class="stat-number">+7000</div>
+                    <div class="stat-label">Students Passed Out</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">+37</div>
+                    <div class="stat-label">Awards & Recognitions</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">+15</div>
+                    <div class="stat-label">Educators</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

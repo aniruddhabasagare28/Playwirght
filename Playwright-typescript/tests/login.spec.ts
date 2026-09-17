@@ -1,16 +1,21 @@
 import {test, expect} from '@playwright/test';
+import { LoginPage } from './pages/loginPage';
+import { DashboardPage } from './pages/dashboardPage';
+import * as orangeHrmLoginData from './testData/orangeHrmLoginData.json';
 
 test('Login test', async ({page})=>{
+    const loginPage = new LoginPage(page);
+    const dashboardPage = new DashboardPage(page);
+
     //open browser
     await page.goto('https://opensource-demo.orangehrmlive.com/web/index.php/auth/login');
-    await page.waitForLoadState('networkidle');
-    //Enter valid username and password
-    await page.getByRole('textbox',({name:'Username'})).fill('Admin');
-    await page.getByRole('textbox', ({name: 'Password'})).fill('admin123');
 
-    //Click on the login button
-    await page.getByRole('button', ({name: 'Login'})).click();
+    //Enter valid username and password and submit
+    await loginPage.enterUsername(orangeHrmLoginData.validCredentials.username);
+    await loginPage.enterPassword(orangeHrmLoginData.validCredentials.password);
+    await loginPage.clickLogin();
 
-    //Verify that the user is successfully logged in by checking for a specific element on the dashboard page
-    await expect( page.getByRole('heading', { name: 'Dashboard' })).toBeVisible();
+    //Verify that the user is successfully logged in by checking the dashboard URL and heading
+    await expect(page).toHaveURL(/dashboard/);
+    await expect(dashboardPage.dashboardHeading).toBeVisible();
 })
